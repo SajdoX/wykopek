@@ -1,0 +1,11 @@
+{
+    "name": "sajdox/wykopek",
+    "description": "wykop ale to tylko memy",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Sajdox\\Wykopek\\": "src/"
+        }
+    },
+    "require": {}
+}

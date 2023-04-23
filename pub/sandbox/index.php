@@ -27,7 +27,10 @@
         $tempUrl = $_FILES['uploadedFile']['tmp_name'];
         //tworzy URL pliku na serwerze
         $targetUrl = $targetDir . $sourceFileName;
-        //przesuwa plik do img
+        if(file_exists($targetUrl)){
+            die('ERROR: There is already file with the same name!');
+        }
+        //przesuwa plik do /img
         move_uploaded_file($tempUrl, $targetUrl);
     }
 

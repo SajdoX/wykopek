@@ -44,7 +44,8 @@
         //niepotrzebne - generujemy webp
 
         //generuje hash
-        $newFileName = hash("sha256", $sourceFileName) . hrtime(true) . "." . ".webp";
+        $hash = hash("sha256", $sourceFileName . hrtime(true));
+        $newFileName = $hash . ".webp";
 
         //zaczytuje cały obraz z folderu tymczasowego do stringa
         $imageString = file_get_contents($tempUrl);
@@ -68,6 +69,14 @@
         //move_uploaded_file($tempUrl, $targetUrl);
         //nieaktualne - generujemy webp
         imagewebp($gdImage, $targetUrl);
+
+        $db = new mysqli('localhost', 'root', '', 'cms');
+        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?)");
+        $dbTimestamp = date("Y-m-d H:i:s");
+        $query->bind_param("ss", $dbTimestamp, $hash);
+        if(!$query->execute()){
+            die("ERROR: Can't save file to database!");
+        }
 
         echo "File uploaded!";
     }

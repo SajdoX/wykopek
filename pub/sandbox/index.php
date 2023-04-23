@@ -11,7 +11,7 @@
         <label for="uploadedFile">
             Select file to upload:
         </label><br>
-        <input type="file" name="uploadedFile" id="uploadedFileInput"><br>
+        <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
         <input type="submit" value="Send file" name="submit"><br>
     </form>
 
@@ -25,24 +25,51 @@
         //pobiera nazwę pliku z $_FILES
         $sourceFileName = $_FILES['uploadedFile']['name'];
 
-        //pobiera tymczasową ścieżkę do pliku na serwerze
-        $tempUrl = $_FILES['uploadedFile']['tmp_name'];
+       //pobiera tymczasową ścieżkę do pliku na serwerze
+       $tempUrl = $_FILES['uploadedFile']['tmp_name'];
 
-        //sprawdź czy przesłany plik to obraz
+        //sprawdza czy przesłany plik to obraz
         $imgInfo = getimagesize($tempUrl);
         if(!is_array($imgInfo)) {
-            die("ERROR: File you try to upload is not a image!");
+            die("ERROR: File you try to upload is not an image!");
         }
 
+        
+
+        //wyciąga pierwotne rozszerzenie pliku
+        //$sourceFileExtension = pathinfo($sourceFileName, PATHINFO_EXTENSION);
+
+        //zmienia litery rozszerzenia na małe
+        //$sourceFileExtension = strtolower($sourceFileExtension);
+        //niepotrzebne - generujemy webp
+
+        //generuje hash
+        $newFileName = hash("sha256", $sourceFileName) . hrtime(true) . "." . ".webp";
+
+        //zaczytuje cały obraz z folderu tymczasowego do stringa
+        $imageString = file_get_contents($tempUrl);
+
+        //generujemy obraz jako obiekt klasy GDImage
+        //@ przed nazwą funkcji ignoruje warning
+        $gdImage = @imagecreatefromstring($imageString);
+
+        //generuje pełny docelowy URL
+        $targetUrl = $targetDir . $newFileName;
+
+        
+
         //tworzy URL pliku na serwerze
-        $targetUrl = $targetDir . $sourceFileName;
+        //$targetUrl = $targetDir . $sourceFileName;
+        //wycofane na rzecz hasha
 
         if(file_exists($targetUrl)){
             die('ERROR: There is already file with the same name!');
         }
 
         //przesuwa plik do /img
-        move_uploaded_file($tempUrl, $targetUrl);
+        //move_uploaded_file($tempUrl, $targetUrl);
+        //nieaktualne - generujemy webp
+        imagewebp($gdImage, $targetUrl);
 
         echo "File uploaded!";
     }

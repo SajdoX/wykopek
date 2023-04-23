@@ -56,8 +56,6 @@
         //generuje pełny docelowy URL
         $targetUrl = $targetDir . $newFileName;
 
-        
-
         //tworzy URL pliku na serwerze
         //$targetUrl = $targetDir . $sourceFileName;
         //wycofane na rzecz hasha

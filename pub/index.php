@@ -1,26 +1,12 @@
 <?php
-require('./../src/config.php');
 
-?>
+require_once('./../src/config.php');
 
-<form action="" method="post" enctype="multipart/form-data">
-        <label for="uploadedFile">
-            Select file to upload:
-        </label><br>
-        <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
-        <input type="submit" value="Send file" name="submit"><br>
-    </form>
+use Steampixel\Route;
 
-<?php
-    //sprawdza czy formularz został wysłany
-    if(isset($_POST['submit'])){
-        Post::upload($_FILES['uploadedFile']['tmp_name']);
-    }
+Route::add('/', function() {
+    echo "Strona główna";
+});
 
-?>
-
-Ostatni post:
-<?php
-var_dump(Post::getLast());
-
+Route::run('/cms/pub');
 ?>

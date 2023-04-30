@@ -1,5 +1,6 @@
 {% include 'header.html.twig' %}
-<h1>Upload meme</h1>
+<h1>{{ pageTitle|default("No site title") }}</h1>
+<div id="pageContainer">
 <form action="" method="post" enctype="multipart/form-data">
     <label for="uploadedFile">
         Select file to upload:
@@ -7,4 +8,5 @@
     <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
     <input type="submit" value="Send file" name="submit"><br>
 </form>
+</div>
 {% include 'footer.html.twig' %}

@@ -30,5 +30,19 @@ Route::add('/upload', function() {
     header("Location: http://localhost/wykopek/pub");
 }, 'post');
 
+Route::add('/register', function() {
+    global $twig;
+    $twigData = array("pageTitle" => "Zarejestruj użytkownika");
+    $twig->display("register.html.twig", $twigData);
+});
+
+Route::add('/register', function() {
+    global $twig;
+    if(isset($_POST['submit'])) {
+        User::register($_POST['email'], $_POST['password']);
+        header("Location: http://localhost/wykopek/pub");
+    }
+}, 'post');
+
 Route::run('/wykopek/pub/');
 ?>

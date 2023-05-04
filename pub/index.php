@@ -96,12 +96,29 @@ Route::add('/admin', function() {
 Route::add('/admin/remove/([0-9]*)', function($id) {
     if(User::isAuth()) {
         Post::remove($id);
-        header("Location: http://localhost/pub/admin");
+        header("Location: http://localhost/wykopek/pub/admin");
     } else {
         http_response_code(403);
     }
 });
 
+Route::add('/like/([0-9])', function($post_id) {
+    if(!User::isAuth()) {
+        http_response_code(403);
+    } else {
+    $user_id = $_SESSION['user']->getId();
+    $like = new Likes($post_id, $user_id, 1);
+    header("Location: http://localhost/wykopek/pub");
+}});
+
+Route::add('/dislike/([0-9])', function($post_id)  {
+    if(!User::isAuth()) {
+        http_response_code(403);
+    } else {
+    $user_id = $_SESSION['user']->getId();
+    $like = new Likes($post_id, $user_id, -1);
+    header("Location: http://localhost/wykopek/pub");
+}});
 
 
 Route::run('/wykopek/pub/');

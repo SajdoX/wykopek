@@ -9,6 +9,9 @@
         <img src='img/{{ post.getFilename() }}.webp'>
         <h5>Autor: {{post.getAuthorName()}} </h5>
         <h6>Post date: {{post.getTimestamp()}}</h6>
+        <button onclick="location.href='like/{{ post.getId }}'" class="upvote" type="button">▲</button>
+        <div class="votecounter"> {{ post.getLikes() }} </div>
+        <button onclick="location.href='dislike/{{ post.getId }}'" class="downvote" type="button">▼</button>
     </div>
     {% endfor %}
 </div>

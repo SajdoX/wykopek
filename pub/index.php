@@ -83,5 +83,26 @@ Route::add('/login', function() {
     
 }, 'post');
 
+Route::add('/admin', function() {
+    global $twig;
+    if(User::isAuth()) {
+        $t = array( "postList" => Post::getPage(1, 100));
+        $twig->display("admin.html.twig", $t);
+    } else {
+        http_response_code(403);
+    }
+});
+
+Route::add('/admin/remove/([0-9]*)', function($id) {
+    if(User::isAuth()) {
+        Post::remove($id);
+        header("Location: http://localhost/pub/admin");
+    } else {
+        http_response_code(403);
+    }
+});
+
+
+
 Route::run('/wykopek/pub/');
 ?>

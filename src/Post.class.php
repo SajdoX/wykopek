@@ -18,10 +18,12 @@ class Post {
         $this->authorName = User::getNameById($this->authorId);
     }
 
+    public function getId() {
+        return $this->id;
+    }
     public function getFilename() : string {
         return $this->filename;
     }
-
     public function getTimestamp() : string {
         return $this->timestamp;
     }
@@ -51,7 +53,7 @@ class Post {
     static function getPage(int $pageNumber = 1, int $postsPerPage = 10) : array {
         global $db;
         //kwerenda
-        $query = $db->prepare("SELECT * FROM post ORDER BY timestamp DESC LIMIT ? OFFSET ?");
+        $query = $db->prepare("SELECT * FROM post WHERE removed = false ORDER BY timestamp DESC LIMIT ? OFFSET ?");
         //oblicza przesunięcie - numer strony * ilość zdjęć na stronie
         $offset = ($pageNumber-1)*$postsPerPage;
         //postawia do kwerendy
@@ -109,13 +111,24 @@ class Post {
         //uzywa globalnego połączenia
         global $db;
         //tworzy kwerendę
-        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?)");
+        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?, false)");
         //przygotowuje znacznik czasu dla bazy danych
         $dbTimestamp = date("Y-m-d H:i:s");
         //zapisuje dane do bazy
         $query->bind_param("ssi", $dbTimestamp, $hash, $userId);
         if(!$query->execute()){
             die("ERROR: Can't save file to database!");
+        }
+    }
+
+    static function remove(int $id) : bool {
+        global $db;
+        $q = $db->prepare("UPDATE post SET removed = true WHERE id = ?");
+        $q->bind_param('i', $id);
+        if ($q->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

@@ -1,0 +1,19 @@
+{%include 'header.html.twig'%}
+<div id="pageContainer">
+    <table>
+        <tr>
+            <th>Ban</th>
+            <th>Duration</th>
+            <th>Author</th>
+            <th>Image</th>
+        </tr>
+    {% for post in postArray %}
+        <tr>
+            <td><a href="'admin/remove/{{ post.getId() }}">Hide</a></td>
+            <td>{{ post.getTimestamp() }}</td>
+            <td>{{ post.getAuthorName() }}</td>
+            <td><img src="{{ post.getFilename() }}" class="thumbnail"></td>
+        </tr>
+    {% endfor %}
+</div>
+{%include 'footer.html.twig'%}

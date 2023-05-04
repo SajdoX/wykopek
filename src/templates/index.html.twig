@@ -3,6 +3,14 @@
 <div id="pageContainer">
     {% if user is defined %}
     <div id="loggedUser">Zalogowano jako: {{ user.getName() }} </div>
+    <br>
+    <a href="logout">Log out</a>
+    <br><br>
+    {% else %}
+    <a href="login">Sign in</a>
+    <br>
+    <a href="register">Sign up</a>
+    <br><br>
     {% endif %}
     {% for post in postArray %}
     <div id="post">

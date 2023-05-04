@@ -120,6 +120,13 @@ Route::add('/dislike/([0-9])', function($post_id)  {
     header("Location: http://localhost/wykopek/pub");
 }});
 
+Route::add('/logout', function() {
+    session_destroy();
+    header("Location: http://localhost/wykopek/pub");
+});
+
+
+
 
 Route::run('/wykopek/pub/');
 ?>

@@ -1,9 +1,12 @@
 {% include 'header.html.twig' %}
 <h1>{{pageTitle}}</h1>
 <div id="pageContainer">
+    {% if user is defined %}
+    <div id="loggedUser">Zalogowano jako: {{ user.getName() }} </div>
+    {% endif %}
     {% for post in postArray %}
     <div id="post">
-        <img src='{{ post.getFilename() }}'>
+        <img src='img/{{ post.getFilename() }}.webp'>
         <h6>Post date: {{post.getTimestamp()}}</h6>
     </div>
     {% endfor %}

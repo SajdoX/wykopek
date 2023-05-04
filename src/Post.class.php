@@ -61,7 +61,7 @@ class Post {
     }
 
 
-    static function upload(string $tempFileName) {
+    static function upload(string $tempFileName, int $userId) {
         //deklaruje folder do którego będą zaczytywane obrazy
         $targetDir = "img/";
 
@@ -99,11 +99,11 @@ class Post {
         //uzywa globalnego połączenia
         global $db;
         //tworzy kwerendę
-        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?)");
+        $query = $db->prepare("INSERT INTO post VALUES(NULL, ?, ?, ?)");
         //przygotowuje znacznik czasu dla bazy danych
         $dbTimestamp = date("Y-m-d H:i:s");
         //zapisuje dane do bazy
-        $query->bind_param("ss", $dbTimestamp, $hash);
+        $query->bind_param("ssi", $dbTimestamp, $hash, $userId);
         if(!$query->execute()){
             die("ERROR: Can't save file to database!");
         }

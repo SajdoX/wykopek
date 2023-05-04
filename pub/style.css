@@ -21,3 +21,10 @@ div#post {
 div#post img{
     width: 100%;
 }
+
+div#loggedUser {
+    text-align: right;
+    font-weight: 1.5rem;
+    height: 20px;
+    background-color: blue;
+}

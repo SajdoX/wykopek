@@ -1,7 +1,7 @@
 <?php
 class User {
-    public int $id;
-    public string $email;
+    private int $id;
+    private string $email;
 
     public function __construct(int $id, string $email) {
         $this->id = $id;
@@ -16,19 +16,18 @@ class User {
     public function getName() : string {
         return $this->email;
     }
-
-    public static function getNameById(int $userId) : string {
+    public static function getNameById(int $userId){
         global $db;
         $query = $db->prepare("SELECT email FROM user WHERE id = ? LIMIT 1");
         $query->bind_param('i', $userId);
         $query->execute();
         $result = $query->get_result();
-        $row = $result->fetch_assoc();
+        $row= $result->fetch_assoc();
         return $row['email'];
-
     }
 
 
+    //rejestracja
     public static function register(string $email, string $password ) : bool {
         global $db;
         $query = $db->prepare("INSERT INTO user VALUES (NULL, ?, ?)");
@@ -36,7 +35,7 @@ class User {
         $query->bind_param('ss', $email, $passwordHash);
         return $query->execute();
     }
-
+    //logowanie
     public static function login(string $email, string $password) {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = ? LIMIT 1");
@@ -45,6 +44,7 @@ class User {
         $result = $query->get_result();
         $row = $result->fetch_assoc();
         $passwordHash = $row['password'];
+        //jeśli autoryzacja się powiedzie zapisuje użytkownika w sesji
         if(password_verify($password, $passwordHash)){
             //hasła są zgodne
             $u = new User($row['id'], $email);

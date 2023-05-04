@@ -34,7 +34,8 @@ Route::add('/upload', function() {
     
     global $twig;
     if(isset($_POST['submit'])){
-        Post::upload($_FILES['uploadedFile']['tmp_name'], $_POST['userId']);
+        $tempFileName = $_FILES['uploadedFile']['tmp_name'];
+        Post::upload($tempFileName, $_POST['userId']);
     }
     
     header("Location: http://localhost/wykopek/pub");

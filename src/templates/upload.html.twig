@@ -10,7 +10,7 @@
     </label><br>
 
     {% if user is defined %}
-    <input type="hidden" name="userId" value="{ user.getId() }">
+    <input type="hidden" name="userId" value="{{ user.getId() }}">
     {% endif %}
     <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
     <input type="submit" value="Send file" name="submit"><br>

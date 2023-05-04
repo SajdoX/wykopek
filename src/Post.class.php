@@ -3,12 +3,19 @@ class Post {
     private int $id;
     private string $filename;
     private string $timestamp;
+    private string $authorId;
+    private string $authorName;
     
-    function __construct(int $i, string $f, string $t)
+    
+    function __construct(int $i, string $f, string $t, int $authorId)
     {
         $this->id = $i;
         $this->filename = $f;
         $this->timestamp = $t;
+        $this->authorId = $authorId;
+        //pobiera z bazy danych login autora
+        global $db;
+        $this->authorName = User::getNameById($this->authorId);
     }
 
     public function getFilename() : string {
@@ -17,6 +24,9 @@ class Post {
 
     public function getTimestamp() : string {
         return $this->timestamp;
+    }
+    public function getAuthorName() : string {
+        return $this->authorName;
     }
 
     //ostatnio dodany obrazek
@@ -32,7 +42,7 @@ class Post {
         //przetwarza tablice asocjacyjną - bez pętli bo będzie tlko jeden
         $row = $result->fetch_assoc();
         //tworzy obiekt
-        $p = new Post($row['id'], $row['filename'], $row['timestamp']);
+        $p = new Post($row['id'], $row['filename'], $row['timestamp'], $row['userId']);
         //zwraca obiekt
         return $p;
     }
@@ -54,7 +64,7 @@ class Post {
         $postsArray = array();
         //pobieraj wiersz po wierszu jako tablice assoc indeksowaną nazwami kolumn z mysql
         while($row = $result->fetch_assoc()){
-            $post = new Post($row['id'], $row['filename'], $row['timestamp']);
+            $post = new Post($row['id'], $row['filename'], $row['timestamp'], $row['userId']);
             array_push($postsArray, $post);
         }
         return $postsArray;

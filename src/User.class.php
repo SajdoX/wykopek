@@ -16,6 +16,22 @@ class User {
     public function getName() : string {
         return $this->email;
     }
+
+    public static function isAuth() : bool {
+        //sprawdza czy w sesji jest coś o nazwie user
+        if(isset($_SESSION['user'])){
+            //sprawdza czy to coś jest instancją klasy user
+            if($_SESSION['user'] instanceof User) {
+                //użytkownik zalogowany
+                return true;
+            }
+        }
+        return false;
+    }
+            
+        
+    
+
     public static function getNameById(int $userId){
         global $db;
         $query = $db->prepare("SELECT email FROM user WHERE id = ? LIMIT 1");

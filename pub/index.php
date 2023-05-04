@@ -24,10 +24,15 @@ Route::add('/upload', function() {
     //strona z formularzem do wgrywania memów
     global $twig;
     $twigData = array("pageTitle" => "Upload meme");
-    if(isset($_SESSION['user'])){
+    if(User::isAuth()){
         $twigData['user'] = $_SESSION['user'];
+        $twig->display('upload.html.twig', $twigData);
     }
-    $twig->display('upload.html.twig', $twigData);
+    else {
+        //zwraca 403 czyli zabronione
+        header('HTTP/1.0 403 Forbidden');
+    }
+    
 });
 
 Route::add('/upload', function() {

@@ -3,16 +3,16 @@
     <table>
         <tr>
             <th>Ban</th>
-            <th>Duration</th>
+            <th>Post date</th>
             <th>Author</th>
             <th>Image</th>
         </tr>
-    {% for post in postArray %}
+    {% for post in postList %}
         <tr>
             <td><a href="'admin/remove/{{ post.getId() }}">Hide</a></td>
             <td>{{ post.getTimestamp() }}</td>
             <td>{{ post.getAuthorName() }}</td>
-            <td><img src="{{ post.getFilename() }}" class="thumbnail"></td>
+            <td><img src="img/{{ post.getFilename() }}.webp" class="thumbnail"></td>
         </tr>
     {% endfor %}
 </div>

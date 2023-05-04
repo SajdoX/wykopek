@@ -7,8 +7,12 @@
 <form action="" method="post" enctype="multipart/form-data">
     <label for="uploadedFile">
         Select file to upload:
-    </label><br>
-
+    </label>
+    <br>
+    <a href="http://localhost/wykopek/pub">Main page</a>
+    <br>
+    <a href="logout">Log out</a>
+    <br>
     {% if user is defined %}
     <input type="hidden" name="userId" value="{{ user.getId() }}">
     {% endif %}

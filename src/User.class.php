@@ -36,12 +36,16 @@ class User {
         return $query->execute();
     }
     //logowanie
-    public static function login(string $email, string $password) {
+    public static function login(string $email, string $password) : bool {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = ? LIMIT 1");
         $query->bind_param('s', $email);
         $query->execute();
         $result = $query->get_result();
+
+        if($result->num_rows == 0)
+            return false;
+
         $row = $result->fetch_assoc();
         $passwordHash = $row['password'];
         //jeśli autoryzacja się powiedzie zapisuje użytkownika w sesji
@@ -49,6 +53,10 @@ class User {
             //hasła są zgodne
             $u = new User($row['id'], $email);
             $_SESSION['user'] = $u;
+            return true;
+        }
+        else {
+            return false;
         }
     } 
 }

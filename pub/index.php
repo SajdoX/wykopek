@@ -65,8 +65,16 @@ Route::add('/login', function() {
     global $twig;
     if(isset($_POST['submit'])) {
         User::login($_POST['email'], $_POST['password']);
+        if(User::login($_POST['email'], $_POST['password'])) {
+            //jeśli logowanie przejdzie przekierowuje na główną stronę
+            header("Location: http://localhost/wykopek/pub");
+        }
+        else {
+            //jeśli logowanie nie przeszło wyświetla komunikat o błędzie
+            $twigData = array("pageTitle" => "Sign in", "message" => "Incorrect login or password");
+            $twig->display("login.html.twig", $twigData);
+        }
     }
-    header("Location: http://localhost/wykopek/pub");
     
 }, 'post');
 

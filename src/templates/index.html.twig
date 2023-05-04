@@ -4,14 +4,14 @@
     {% if user is defined %}
     <div id="loggedUser">Zalogowano jako: {{ user.getName() }} </div>
     <br>
-    <a href="upload">Upload</a>
+    <a href="upload"><div class="kloc">Upload</div></a>
     <br>
-    <a href="logout">Log out</a>
+    <a href="logout"><div class="kloc">Log out</div></a>
     <br><br>
     {% else %}
-    <a href="login">Sign in</a>
+    <a href="login"><div class="kloc">Sign in</div></a>
     <br>
-    <a href="register">Sign up</a>
+    <a href="register"><div class="kloc">Sign up</div></a>
     <br><br>
     {% endif %}
     {% for post in postArray %}

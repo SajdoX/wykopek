@@ -1,11 +1,18 @@
+* {
+    color: white;
+}
+
 body {
     margin: 0;
     padding: 0;
+    background-color: rgb(67, 198, 231);
 }
 
 div#pageContainer {
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
+    background-color: rgb(84, 105, 129);
+    margin: auto;
 }
 
 h1 {
@@ -13,13 +20,20 @@ h1 {
 }
 
 div#post {
-    background-color: aquamarine;
+    background-color: rgb(22, 53, 138);
     padding: 20px;
     margin-bottom: 20px;
+    max-width: 75%;
+    text-align: center;
+    margin: auto;
+    color: black;
 }
 
 div#post img{
     width: 100%;
+    max-height: 50%;
+    max-width: 50%;
+    margin: auto;
 }
 
 div#loggedUser {
@@ -27,4 +41,11 @@ div#loggedUser {
     font-weight: 1.5rem;
     height: 20px;
     background-color: rgb(120, 120, 228);
+}
+
+.kloc {
+    background-color: rgb(55, 128, 103);
+    width: 50px;
+    height: 50px;
+    float: left;
 }

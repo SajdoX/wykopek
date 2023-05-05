@@ -1,19 +1,24 @@
 {% include 'header.html.twig' %}
-<h1>{{pageTitle}}</h1>
-<div id="pageContainer">
-    {% if user is defined %}
+
+{% if user is defined %}
     <div id="loggedUser">Zalogowano jako: {{ user.getName() }} </div>
-    <br>
-    <a href="upload"><div class="kloc">Upload</div></a>
-    <br>
-    <a href="logout"><div class="kloc">Log out</div></a>
-    <br><br>
+        <table class="list">
+            <th>
+                <td><a href="upload"><div class="kloc">Upload</div></a></td>
+                <td><a href="logout"><div class="kloc">Log out</div></a></td>
+            </th>
+        </table>
     {% else %}
-    <a href="login"><div class="kloc">Sign in</div></a>
-    <br>
-    <a href="register"><div class="kloc">Sign up</div></a>
-    <br><br>
+        <table class="list">
+            <th>
+                <td><a href="login"><div class="kloc">Sign in</div></a></td>
+                <td><a href="register"><div class="kloc">Sign up</div></a></td>
+            </th>
+        </table>
     {% endif %}
+    <h1>{{pageTitle}}</h1>
+<div id="pageContainer">
+    
     {% for post in postArray %}
     <div id="post">
         <img src='img/{{ post.getFilename() }}.webp'>
@@ -26,3 +31,5 @@
     {% endfor %}
 </div>
 {% include 'footer.html.twig' %}
+
+

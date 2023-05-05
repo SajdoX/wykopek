@@ -1,5 +1,5 @@
 * {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 body {
@@ -9,9 +9,9 @@ body {
 }
 
 div#pageContainer {
-    width: 80%;
-    margin: 0 auto;
-    background-color: rgb(84, 105, 129);
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+    width: 1200px;
     margin: auto;
 }
 
@@ -20,10 +20,10 @@ h1 {
 }
 
 div#post {
-    background-color: rgb(22, 53, 138);
+    background-color: rgb(52, 172, 156);
     padding: 20px;
     margin-bottom: 20px;
-    max-width: 75%;
+    width: 800px;
     text-align: center;
     margin: auto;
     color: black;
@@ -37,15 +37,108 @@ div#post img{
 }
 
 div#loggedUser {
-    text-align: right;
-    font-weight: 1.5rem;
-    height: 20px;
-    background-color: rgb(120, 120, 228);
+    background-color: aquamarine;
+    height: 50px;
+    width: 200px;
+    float: right;
+    text-align: center;
+    border: 3px darkcyan solid;
+    margin: 10px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
 }
 
-.kloc {
-    background-color: rgb(55, 128, 103);
+
+
+.list td {  
     width: 50px;
     height: 50px;
-    float: left;
+    background-color: aquamarine;
+    text-align: center;
+    border: 3px darkcyan solid;
+    font-family: fantasy;
+}
+
+a {
+    text-decoration: none;
+}
+
+#signin {
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+    width: 800px;
+    margin: auto;
+}
+
+#signin form {
+    text-align: center;
+    text-indent: 17px;
+}
+
+#mp {
+    width: 100px;
+    height: 20px;
+    background-color: aquamarine;
+    text-align: center;
+    border: 3px darkcyan solid;
+    font-family: fantasy;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#signup {
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+    width: 800px;
+    margin: auto;
+}
+
+#signup form {
+    text-align: center;
+    text-indent: 17px;
+}
+
+#uploadsite {
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+    width: 800px;
+    margin: auto;
+}
+
+#uploadsite form {
+    text-align: center;
+    text-indent: 17px;
+}
+
+#lob {
+    width: 100px;
+    height: 20px;
+    background-color: aquamarine;
+    text-align: center;
+    border: 3px darkcyan solid;
+    font-family: fantasy;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#adminpanel {
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+    width: 800px;
+    margin: auto;
+}
+
+#adminpanel img {
+    width: 400px;
+}
+
+#adminpanel  th{
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
+}
+
+#adminpanel  td{
+    background-color: aquamarine;
+    border: 5px darkcyan solid;
 }

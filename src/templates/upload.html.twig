@@ -1,17 +1,16 @@
 {% include 'header.html.twig' %}
-<h1>{{ pageTitle|default("No site title") }}</h1>
+
 {% if user is defined %}
 <div id="loggedUser">Zalogowano jako: {{ user.getName() }} </div>
 {% endif %}
-<div id="pageContainer">
+<div id="uploadsite">
+    <div id="mp"><a href="http://localhost/wykopek/pub">Main page</a></div>
+    <div id="lob"><a href="logout">Log out</a></div>
+    <h1>{{ pageTitle|default("No site title") }}</h1>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="uploadedFile">
         Select file to upload:
     </label>
-    <br>
-    <a href="http://localhost/wykopek/pub">Main page</a>
-    <br>
-    <a href="logout">Log out</a>
     <br>
     {% if user is defined %}
     <input type="hidden" name="userId" value="{{ user.getId() }}">
